@@ -7,13 +7,11 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import kotlinx.android.synthetic.main.activity_item_detail.*
-import net.swimmi.poemscript.ui.fragment.ScriptDetailFragment
+import net.swimmi.poemscript.ui.fragment.PoemInfoFragment
 import net.swimmi.poemscript.R
+import net.swimmi.poemscript.ui.fragment.ScriptInfoFragment
 
 class ScriptDetailActivity : AppCompatActivity() {
 
@@ -23,28 +21,36 @@ class ScriptDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item_detail)
         setSupportActionBar(detail_toolbar)
 
-        fab.setOnClickListener {
-            val tab = TabLayout.Tab()
-            tab.text = "新的一幕"
-            tabs.addTab(tab, true)
-        }
-
-        // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        // Set up the ViewPager with the sections adapter.
         container.adapter = mSectionsPagerAdapter
 
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
+            R.id.act_info -> {
+                startActivity(Intent(this, ScriptInfoActivity::class.java))
+                true
+            }
+            R.id.act_add -> {
+                startActivity(Intent(this, ActAddActivity::class.java))
+                true
+            }
+            R.id.act_play -> {
+                startActivity(Intent(this, ScriptPlayActivity::class.java))
+                true
+            }
             android.R.id.home -> {
-
-                navigateUpTo(Intent(this, ScriptListActivity::class.java))
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -58,8 +64,8 @@ class ScriptDetailActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return if (position == 0) {
-                ScriptDetailFragment().apply {
+            return when (position) {
+                0 -> PoemInfoFragment().apply {
                     arguments = Bundle().apply {
                         putLong(
                             "script_id",
@@ -67,13 +73,19 @@ class ScriptDetailActivity : AppCompatActivity() {
                         )
                     }
                 }
-            } else {
-                PlaceholderFragment.newInstance(position + 1)
+                1 -> ScriptInfoFragment().apply {
+                    arguments = Bundle().apply {
+                        putLong(
+                            "script_id",
+                            intent.getLongExtra("script_id", 0)
+                        )
+                    }
+                }
+                else -> PlaceholderFragment.newInstance(position + 1)
             }
         }
 
         override fun getCount(): Int {
-            // Show 3 total pages.
             return tabs.tabCount
         }
     }
@@ -84,7 +96,7 @@ class ScriptDetailActivity : AppCompatActivity() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-            val rootView = inflater.inflate(R.layout.fragment_scene, container, false)
+            val rootView = inflater.inflate(R.layout.fragment_act, container, false)
             return rootView
         }
 

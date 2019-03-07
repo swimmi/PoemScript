@@ -16,14 +16,14 @@ import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_script_list.*
 import net.swimmi.poemscript.R
-import net.swimmi.poemscript.db.model.Script
+import net.swimmi.poemscript.db.model.Poem
 import org.litepal.LitePal
 import org.litepal.extension.delete
 import org.litepal.extension.findAll
 
 class ScriptListActivity : AppCompatActivity() {
 
-    private lateinit var dataList: List<Script>
+    private lateinit var dataList: List<Poem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,7 @@ class ScriptListActivity : AppCompatActivity() {
                     startActivityForResult(intent, 2)
                 }
                 1 -> {
-                    LitePal.delete<Script>(item.id)
+                    LitePal.delete<Poem>(item.id)
                     loadListData()
                     Snackbar.make(item_list, "删除成功", Snackbar.LENGTH_SHORT).show()
                 }
@@ -82,7 +82,7 @@ class ScriptListActivity : AppCompatActivity() {
     }
 
     private fun loadListData() {
-        dataList = LitePal.findAll<Script>()
+        dataList = LitePal.findAll<Poem>()
         (item_list as SwipeRecyclerView).adapter = SimpleItemRecyclerViewAdapter(
             this,
             dataList
@@ -91,7 +91,7 @@ class ScriptListActivity : AppCompatActivity() {
 
     class SimpleItemRecyclerViewAdapter(
         private val parentActivity: ScriptListActivity,
-        private val values: List<Script>
+        private val values: List<Poem>
     ) :
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -99,7 +99,7 @@ class ScriptListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Script
+                val item = v.tag as Poem
                 val intent = Intent(v.context, ScriptDetailActivity::class.java).apply {
                     putExtra("script_id", item.id)
                 }

@@ -6,7 +6,7 @@
 	<version value="1" />
 
 	<list>
-		<mapping class="net.swimmi.poemscript.db.model.Script" />
+		<mapping class="net.swimmi.poemscript.db.model.Poem" />
 	</list>
 
 </litepal>

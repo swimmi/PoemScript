@@ -45,10 +45,16 @@
 	            android:layout_height="wrap_content">
 
 	        <android.support.design.widget.TabItem
-	                android:id="@+id/tabItem"
+	                android:id="@+id/poem_info"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:text="@string/tab_info"/>
+	                android:text="@string/title_poem_info"/>
+
+			<android.support.design.widget.TabItem
+					android:id="@+id/script_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/title_script_info"/>
 
 	    </android.support.design.widget.TabLayout>
 
@@ -58,14 +64,5 @@
 	            android:layout_height="match_parent"/>
 
 	</LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_play_light"
-            app:layout_anchor="@+id/container"
-            app:layout_anchorGravity="bottom|end"/>
 
 </android.support.design.widget.CoordinatorLayout>

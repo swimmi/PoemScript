@@ -8,13 +8,13 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_script_add.*
 import kotlinx.android.synthetic.main.content_script_add.*
 import net.swimmi.poemscript.R
-import net.swimmi.poemscript.db.model.Script
+import net.swimmi.poemscript.db.model.Poem
 import org.litepal.LitePal
 import org.litepal.extension.find
 
 class ScriptAddActivity : AppCompatActivity() {
 
-    private var oldScript: Script? = null
+    private var oldPoem: Poem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,15 +29,15 @@ class ScriptAddActivity : AppCompatActivity() {
         }
         if (intent.hasExtra("script_id")) {
             val id = intent.getLongExtra("script_id", 1)
-            oldScript = LitePal.find<Script>(id)
-            title = getString(R.string.title_edit_script)
+            oldPoem = LitePal.find<Poem>(id)
+            title = getString(R.string.title_script_edit)
             fab.setImageDrawable(getDrawable(R.drawable.ic_done_light))
-            script_title.setText(oldScript!!.title)
-            script_author.setText(oldScript!!.author)
-            script_period.setText(oldScript!!.period)
-            script_desc.setText(oldScript!!.desc)
-            script_text.setText(oldScript!!.text)
-            script_word.setText(oldScript!!.word)
+            script_title.setText(oldPoem!!.title)
+            script_author.setText(oldPoem!!.author)
+            script_period.setText(oldPoem!!.period)
+            script_desc.setText(oldPoem!!.desc)
+            script_text.setText(oldPoem!!.text)
+            script_word.setText(oldPoem!!.word)
         }
     }
 
@@ -48,16 +48,16 @@ class ScriptAddActivity : AppCompatActivity() {
         val desc = script_desc.text.toString()
         val text = script_text.text.toString()
         val word = script_word.text.toString()
-        if (oldScript == null) {
-            Script(1, title, author, period, desc, text, word).save()
+        if (oldPoem == null) {
+            Poem(1, title, author, period, desc, text, word).save()
         } else {
-            oldScript!!.title = title
-            oldScript!!.author = author
-            oldScript!!.period = period
-            oldScript!!.desc = desc
-            oldScript!!.text = text
-            oldScript!!.word = word
-            oldScript!!.save()
+            oldPoem!!.title = title
+            oldPoem!!.author = author
+            oldPoem!!.period = period
+            oldPoem!!.desc = desc
+            oldPoem!!.text = text
+            oldPoem!!.word = word
+            oldPoem!!.save()
         }
     }
 

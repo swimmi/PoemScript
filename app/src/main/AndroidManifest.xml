@@ -14,6 +14,18 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.ScriptPlayActivity">
+        </activity>
+        <activity
+                android:name=".ui.activity.ScriptInfoActivity"
+                android:label="@string/title_script_info"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ui.activity.ActAddActivity"
+                android:label="@string/title_act_add"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
                 android:name=".ui.activity.ScriptAddActivity"
                 android:label="@string/title_script_add"
