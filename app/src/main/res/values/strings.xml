@@ -1,0 +1,14 @@
+<resources>
+	<string name="app_name">诗词话本</string>
+	<string name="title_item_detail">Item Detail</string>
+	<string name="title_script_add">添加话本</string>
+	<string name="title_edit_script">修改话本</string>
+	<string name="script_title">标题</string>
+	<string name="script_author">作者</string>
+	<string name="script_desc">描述</string>
+	<string name="script_text">正文</string>
+	<string name="script_period">时代</string>
+	<string name="script_word">结词</string>
+	<string name="script_date">日期</string>
+	<string name="tab_info">作品信息</string>
+</resources>
